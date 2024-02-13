@@ -5,3 +5,10 @@ C:\Users\Daniel\source\repos\zadanie_Almasi\zadanie_Almasi\obj\Debug\zadanie_Alm
 C:\Users\Daniel\source\repos\zadanie_Almasi\zadanie_Almasi\obj\Debug\zadanie_Almasi.csproj.CoreCompileInputs.cache
 C:\Users\Daniel\source\repos\zadanie_Almasi\zadanie_Almasi\obj\Debug\zadanie_Almasi.exe
 C:\Users\Daniel\source\repos\zadanie_Almasi\zadanie_Almasi\obj\Debug\zadanie_Almasi.pdb
+C:\Users\Daniel\Desktop\GUI\zadanie-Almasi\zadanie_Almasi\bin\Debug\zadanie_Almasi.exe.config
+C:\Users\Daniel\Desktop\GUI\zadanie-Almasi\zadanie_Almasi\bin\Debug\zadanie_Almasi.exe
+C:\Users\Daniel\Desktop\GUI\zadanie-Almasi\zadanie_Almasi\bin\Debug\zadanie_Almasi.pdb
+C:\Users\Daniel\Desktop\GUI\zadanie-Almasi\zadanie_Almasi\obj\Debug\zadanie_Almasi.csproj.AssemblyReference.cache
+C:\Users\Daniel\Desktop\GUI\zadanie-Almasi\zadanie_Almasi\obj\Debug\zadanie_Almasi.csproj.CoreCompileInputs.cache
+C:\Users\Daniel\Desktop\GUI\zadanie-Almasi\zadanie_Almasi\obj\Debug\zadanie_Almasi.exe
+C:\Users\Daniel\Desktop\GUI\zadanie-Almasi\zadanie_Almasi\obj\Debug\zadanie_Almasi.pdb

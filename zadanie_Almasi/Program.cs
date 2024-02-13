@@ -18,8 +18,8 @@ namespace zadanie_Almasi
             Storage storage = new Storage();
             storage.splitString(textValues, authorVaules, webDownloader.download("http://mvi.mechatronika.cool/sites/default/files/berces.html"));
 
-            for (int i = 0; i < textValues.Count; i++) {
-                Console.WriteLine(textValues[i] + ' ' + authorVaules[i]);
+            foreach (var values in textValues) { 
+                Console.WriteLine(values.Key + ' ' +values.Value + ' ');
             }
             Console.ReadLine();
         }
@@ -30,7 +30,7 @@ namespace zadanie_Almasi
 
         public void splitString(Dictionary<int, string> textDictionary, Dictionary<int, string> authorDictionary, string text) {
             newString = text.Split('.');
-
+            /// todo: Zmen pridavanie do listu. Odstan authorVals a len pridavaj do jedneho dicts <int, string[]>
             for (int i = 0; i < newString.Length; i++) {
                 textDictionary.Add(i, newString[i] + '.');
                 authorDictionary.Add(i, "UNKNOWN");
