@@ -58,8 +58,12 @@ namespace zadanie_Almasi
 
                     try
                     {
-                        ///Zmena stringu
-                        string[] updatedString = new string[] { updateText, updateAuthor };
+                        ///Vyhodi Exception ak sa kluc v dict nechadza kedze nemozem zmenit nieco co neexistuje
+                        if (!textValues.ContainsKey(Convert.ToInt32(changeID))) {
+                            throw new Exception();
+                        }
+                            ///Zmena stringu
+                            string[] updatedString = new string[] { updateText, updateAuthor };
                         textValues[Convert.ToInt32(changeID)] = updatedString;
                         Console.WriteLine("Zaznam s ID" + changeID + " sa podarilo zmenit");
 
@@ -71,6 +75,9 @@ namespace zadanie_Almasi
                 }
                 if (option.Equals("4"))
                 {
+                    Console.WriteLine("Zadaj ID zaznamu ktory si zelas pridat");
+                    string addID = Console.ReadLine();
+
                     Console.WriteLine("Zadaj text ktory si zelas pridat: ");
                     string addText = Console.ReadLine();
 
@@ -79,21 +86,27 @@ namespace zadanie_Almasi
 
                     try
                     {
+                        ///Vyhodi Exception ak sa kluc v dict nachadza aby nedoslo k prepisaniu
+                        if (textValues.ContainsKey(Convert.ToInt32(addID))) {
+                            throw new Exception();
+                        }
+
                         ///Zmena stringu
                         string[] updatedString = new string[] { addText, addAuthor };
                         textValues[Convert.ToInt32(textValues.Count)] = updatedString;
-                        Console.WriteLine("Zaznam s ID" + textValues.Count + " sa podarilo pridat");
+                        Console.WriteLine("Zaznam s ID" + addID + " sa podarilo pridat");
 
                     }
                     catch (Exception e)
                     {
-                        Console.WriteLine("Zaznam sa nepodarilo zmenit");
+                        Console.WriteLine("Zaznam sa nepodarilo pridat");
                     }
                 }
             }
         }
     }
     class Menu {
+        ///Vsetky funkcie ktore pouzivam na vypisovanie roznych menu casti
         public string menu() {
             Console.WriteLine("------------------------\n1->Vypis vsetky zaznamy\n2->Vymaz zaznam\n3->Zmen vetu v zazname a nasledne autora\n4->Pridaj zaznam\n5->Koniec\n------------------------");
             return Console.ReadLine();
