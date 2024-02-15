@@ -78,11 +78,7 @@ namespace zadanie_Almasi
                     Console.WriteLine("Zadaj ID zaznamu ktory si zelas pridat");
                     string addID = Console.ReadLine();
 
-                    Console.WriteLine("Zadaj text ktory si zelas pridat: ");
-                    string addText = Console.ReadLine();
-
-                    Console.WriteLine("Zadaj autora: ");
-                    string addAuthor = Console.ReadLine();
+                    string[] add = menu.versatilMenu("Zadaj text ktory si zelas pridat: ", "Zadaj autora: ");
 
                     try
                     {
@@ -92,10 +88,9 @@ namespace zadanie_Almasi
                         }
 
                         ///Zmena stringu
-                        string[] updatedString = new string[] { addText, addAuthor };
-                        textValues[Convert.ToInt32(textValues.Count)] = updatedString;
+                        string[] updatedString = new string[] { add[0], add[1] };
+                        textValues[Convert.ToInt32(addID)] = updatedString;
                         Console.WriteLine("Zaznam s ID" + addID + " sa podarilo pridat");
-
                     }
                     catch (Exception e)
                     {
@@ -123,8 +118,16 @@ namespace zadanie_Almasi
         }
         public string menuAdd()
         {
-            
             return Console.ReadLine();
+        }
+        public string[] versatilMenu(string text, string author) {
+
+            Console.WriteLine(text);
+            string addText = Console.ReadLine();
+
+            Console.WriteLine(author);
+            string addAuthor = Console.ReadLine();
+            return new string[] { addText, addAuthor };
         }
         }
     class Storage {
