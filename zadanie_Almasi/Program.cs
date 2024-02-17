@@ -26,6 +26,7 @@ namespace zadanie_Almasi
 
                 if (option.Equals("1"))
                 {
+                    ///Vypisanie celeho listu
                     foreach (var values in textValues)
                     {
                         Console.WriteLine("ID: " + values.Key);
@@ -35,9 +36,13 @@ namespace zadanie_Almasi
                 }
                 if (option.Equals("2"))
                 {
-                    string deleteID = menu.menuDelete();
+                    string deleteID = menu.askOptions("Zadaj ID ktore si zelas odstranit: ");
                     try
                     {
+                        ///Vyhodi Exception ak sa kluc v dict nechadza kedze nemozem vymazat nieco co neexistuje
+                        if (!textValues.ContainsKey(Convert.ToInt32(deleteID))) {
+                            throw new Exception();                        
+                        }
                         textValues.Remove(Convert.ToInt32(deleteID));
                         Console.WriteLine("Zaznam s ID " + deleteID + " bolo uspesne vymazane.");
                     }
@@ -48,24 +53,18 @@ namespace zadanie_Almasi
                 }
                 if (option.Equals("3"))
                 {
-                    string changeID = menu.menuChange();
+                    string changeID = menu.askOptions("Zadaj ID ktore si zelas zmenit: ");
 
-                    Console.WriteLine("TEXT: ");
-                    string updateText = Console.ReadLine();
-
-                    Console.WriteLine("Autor: ");
-                    string updateAuthor = Console.ReadLine();
-
+                    string[] add = menu.versatilMenu("Zadaj text ktory si zelas pridat: ", "Zadaj autora: ");
                     try
                     {
                         ///Vyhodi Exception ak sa kluc v dict nechadza kedze nemozem zmenit nieco co neexistuje
                         if (!textValues.ContainsKey(Convert.ToInt32(changeID))) {
                             throw new Exception();
                         }
-                            ///Zmena stringu
-                            string[] updatedString = new string[] { updateText, updateAuthor };
-                        textValues[Convert.ToInt32(changeID)] = updatedString;
-                        Console.WriteLine("Zaznam s ID" + changeID + " sa podarilo zmenit");
+                        ///Zmena stringu
+                        storage.updateString(textValues, add, Convert.ToInt32(changeID));
+                        Console.WriteLine("Zaznam s ID " + changeID + " sa podarilo zmenit");
 
                     }
                     catch (Exception e)
@@ -88,9 +87,8 @@ namespace zadanie_Almasi
                         }
 
                         ///Zmena stringu
-                        string[] updatedString = new string[] { add[0], add[1] };
-                        textValues[Convert.ToInt32(addID)] = updatedString;
-                        Console.WriteLine("Zaznam s ID" + addID + " sa podarilo pridat");
+                        storage.updateString(textValues, add, Convert.ToInt32(addID));
+                        Console.WriteLine("Zaznam s ID " + addID + " sa podarilo pridat");
                     }
                     catch (Exception e)
                     {
@@ -107,15 +105,11 @@ namespace zadanie_Almasi
             return Console.ReadLine();
         }
 
-        public string menuDelete() {
-            Console.WriteLine("Zadaj ID ktore si zelas odstranit: ");
+        public string askOptions(string text) {
+            Console.WriteLine(text);
             return Console.ReadLine();
         }
-        public string menuChange()
-        {
-            Console.WriteLine("Zadaj ID ktore si zelas zmenit: ");
-            return Console.ReadLine();
-        }
+
         public string menuAdd()
         {
             return Console.ReadLine();
@@ -129,11 +123,10 @@ namespace zadanie_Almasi
             string addAuthor = Console.ReadLine();
             return new string[] { addText, addAuthor };
         }
-        }
+    }
     class Storage {
         string[] newString;
-
-        
+  
         public void splitString(Dictionary<int, string[]> textDictionary,  string text) {
             //Splitnutie stringu pri znaku . a ulozenie do array
             newString = text.Split('.');
@@ -142,11 +135,15 @@ namespace zadanie_Almasi
             for (int i = 0; i < newString.Length; i++) {
                 string[] newArray = new string[] { newString[i] + '.', "unknown" };
                 textDictionary.Add(i, newArray);
-            }
-            
+            }  
         }
-
+        public void updateString(Dictionary<int, string[]> values, string[] updated, int ID) {
+            ///Zabalenie stringov do updatedString ktore sa nasledne aktualizuje/prida
+            string[] updatedString = new string[] { updated[0], updated[1] };
+            values[ID] = updatedString;
+        }
     }
+
     class webDownloader { 
         ///Stahovanie a vratenie stringu z web stranky
         public string download(string url)
@@ -154,7 +151,5 @@ namespace zadanie_Almasi
             WebClient client = new WebClient();
             return client.DownloadString(url);
         }
-
-
     }
 }
