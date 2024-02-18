@@ -11,6 +11,7 @@ namespace zadanie_Almasi
 {
     internal class Program
     {
+        /// URL: http://mvi.mechatronika.cool/sites/default/files/berces.html
         static Dictionary<int, string[]> textValues = new Dictionary<int, string[]>();
 
         static void Main(string[] args)
@@ -18,7 +19,9 @@ namespace zadanie_Almasi
             webDownloader webDownloader = new webDownloader();
             Menu menu = new Menu();
             Storage storage = new Storage();
-            storage.splitString(textValues, webDownloader.download("http://mvi.mechatronika.cool/sites/default/files/berces.html"));
+            Console.WriteLine("Zadaj cistu HTML ktoru si zelas stiahnut: ");
+            
+            storage.splitString(textValues, webDownloader.download(Console.ReadLine()));
 
             while (true)
             {
@@ -54,7 +57,6 @@ namespace zadanie_Almasi
                 if (option.Equals("3"))
                 {
                     string changeID = menu.askOptions("Zadaj ID ktore si zelas zmenit: ");
-
                     string[] add = menu.versatilMenu("Zadaj text ktory si zelas pridat: ", "Zadaj autora: ");
                     try
                     {
@@ -95,6 +97,9 @@ namespace zadanie_Almasi
                         Console.WriteLine("Zaznam sa nepodarilo pridat");
                     }
                 }
+                if (option.Equals("5")) { 
+                    return;
+                }
             }
         }
     }
@@ -132,7 +137,7 @@ namespace zadanie_Almasi
             newString = text.Split('.');
 
             //Pridanie array do dictionary s jeho klucom
-            for (int i = 0; i < newString.Length; i++) {
+            for (int i = 0; i < newString.Length-1; i++) {
                 string[] newArray = new string[] { newString[i] + '.', "unknown" };
                 textDictionary.Add(i, newArray);
             }  
